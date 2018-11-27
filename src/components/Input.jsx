@@ -7,8 +7,7 @@ class Input extends Component {
 
         this.state = {
             content: props.label,
-            defaultLabel: props.label,
-            description: (this.props.description) ? this.props.description : ''
+            defaultLabel: props.label
         }
         
         this.handleChange = this.handleChange.bind(this)
@@ -48,20 +47,13 @@ class Input extends Component {
         if(this.state.content === this.state.defaultLabel){
             defaultContent = 'default'
         }
-        let inputDesc = ''
-        if(this.state.description !== ''){
-            inputDesc = <div className="input-desc">{this.state.description}</div>
-        }
         return(
-            <div className={''}>
-                {inputDesc}
-                <input className={`text ${defaultContent}`}
+            <input className={`text ${defaultContent}`}
                     value={this.state.content}
                     onChange={this.handleChange} 
                     onFocus={this.handleFocus} 
                     onBlur={this.handleBlur}
-                ></input>
-            </div>
+                />
         )
     }
 }

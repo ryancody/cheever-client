@@ -16,7 +16,7 @@ class Achievement extends Component {
     const {name, desc} = this.state;
 
     return (
-        <div className="achievement">
+        <div className="box">
             <h4>{name}</h4>
             <img
                 src={`http://cheever.s3.amazonaws.com/${this.props.appid}/${md5(name)}.jpg`}

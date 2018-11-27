@@ -19,12 +19,7 @@ class App extends Component {
   handleValue = (val) => {
     console.log(val)
     
-    this.setState({curAppId:val})
-    this.getCheevs()
-  }
-
-  componentDidMount() {
-    this.getCheevs()
+    this.setState({curAppId:val}, () => this.getCheevs())
   }
 
   async getCheevs () {
@@ -60,14 +55,14 @@ class App extends Component {
       <div className="App">
         <section className="section">
           <div className="container">
-            <h1 className="title">
+            <div className="title is-size-1">
               Cheever
-            </h1>
+            </div>
             <p className="subtitle">
               gotta <strong>'cheev</strong> em all!
             </p>
             <Input label={"appid"} submitValue={ this.handleValue }/>
-            <h2>{this.state.curAppName}</h2>
+            <div className="title is-size-2">{this.state.curAppName}</div>
             {cheevs}
           </div>
         </section>
