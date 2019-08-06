@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Input from './components/Input'
 import request from 'request-promise'
-import Achievement from './components/Achievement'
+import Game from './components/Game'
 import bulma from 'bulma'
 
 class App extends Component {
@@ -10,21 +10,20 @@ class App extends Component {
     super(props)
     
     this.state = {
-      curAppId: 0,
-      curAppName:'',
-      curCheevs:[]
+      curGames: [],
+      curAppName: ''
     }
   }
 
   handleValue = (val) => {
     console.log(val)
     
-    this.setState({curAppId:val}, () => this.getCheevs())
+    this.setState({curGames: [], curAppName:val}, () => this.getGames())
   }
 
-  async getCheevs () {
+  async getGames () {
     let options = {
-      url:'http://localhost:3000/get?appid=' + this.state.curAppId,
+      url:'http://localhost:5000/getAll?id=' + this.state.curAppName,
       method:'GET'
     }
     
@@ -34,8 +33,7 @@ class App extends Component {
       console.log(data)
 
       this.setState({
-        curAppName:data.name,
-        curCheevs:data.achievements
+        curGames:data
       })
     }catch(e){
       console.log(e.message)
@@ -46,9 +44,9 @@ class App extends Component {
   render() {
 
     let key = 0
-    let cheevs = this.state.curCheevs.map((i) => {
+    let games = this.state.curGames.map((i) => {
       key++
-      return <Achievement key={key} name={i.name} appid={this.state.curAppId} desc={i.desc}/>
+      return <Game key={key} name={i.name} />
     })
 
     return (
@@ -63,7 +61,7 @@ class App extends Component {
             </p>
             <Input label={"appid"} submitValue={ this.handleValue }/>
             <div className="title is-size-2">{this.state.curAppName}</div>
-            {cheevs}
+            {games}
           </div>
         </section>
       </div>
