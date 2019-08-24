@@ -59,7 +59,7 @@ class App extends Component {
             <p className="subtitle">
               gotta <strong>'cheev</strong> em all!
             </p>
-            <Input label={""} submitValue={ this.handleValue }/>
+            <Input label={"Search titles..."} submitValue={ this.handleValue }/>
             <div className="title is-size-2">{this.state.curAppName}</div>
             {games}
           </div>

@@ -6,7 +6,7 @@ class Input extends Component {
         super(props)
 
         this.state = {
-            content: props.label,
+            content: '',
             defaultLabel: props.label
         }
         
@@ -27,7 +27,7 @@ class Input extends Component {
     render() {
 
         return(
-            <input className={'input'} type='text' placeholder='Search titles...'
+            <input className={'input'} type='text' placeholder={this.state.defaultLabel}
                     value={this.state.content}
                     onChange={this.handleChange}
                 />
