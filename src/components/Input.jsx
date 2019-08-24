@@ -11,24 +11,6 @@ class Input extends Component {
         }
         
         this.handleChange = this.handleChange.bind(this)
-        this.handleFocus = this.handleFocus.bind(this)
-        this.handleBlur = this.handleBlur.bind(this)
-    }
-
-    handleFocus(e) {
-        if(e.target.value === this.state.defaultLabel){
-            this.setState({
-                content: ""
-            })
-        }
-    }
-
-    handleBlur(e) {
-        if(e.target.value === ''){
-            this.setState({
-                content: this.state.defaultLabel
-            })
-        }
     }
     
     // when text in input box changes
@@ -43,16 +25,11 @@ class Input extends Component {
     }
 
     render() {
-        let defaultContent = ''
-        if(this.state.content === this.state.defaultLabel){
-            defaultContent = 'default'
-        }
+
         return(
-            <input className={`text ${defaultContent}`}
+            <input className={'input'} type='text' placeholder='Search titles...'
                     value={this.state.content}
-                    onChange={this.handleChange} 
-                    onFocus={this.handleFocus} 
-                    onBlur={this.handleBlur}
+                    onChange={this.handleChange}
                 />
         )
     }
