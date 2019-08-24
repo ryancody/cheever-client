@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Input from './components/Input'
 import request from 'request-promise'
 import Game from './components/Game'
-import bulma from 'bulma'
+require('../node_modules/bulma/css/bulma.min.css')
 
 class App extends Component {
 
@@ -74,6 +74,7 @@ class App extends Component {
             <Input label={"Search titles..."} 
                     submitValue={ this.handleChange } 
                     isLoading={this.state.searchBarLoading}
+                    isActive={ (this.state.curGames) ? true : false }
                     />
             <div className="title is-size-2">{this.state.curAppName}</div>
             {games}
