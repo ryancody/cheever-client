@@ -11,7 +11,9 @@ class App extends Component {
     
     this.state = {
       curGames: [],
-      curAppName: ''
+      curAppName: '',
+      searchTimer: 0,
+      searchBarLoading: false
     }
   }
 
@@ -19,6 +21,16 @@ class App extends Component {
     console.log(val)
     
     this.setState({curGames: [], curAppName:val}, () => this.getGames())
+  }
+
+  handleChange = (val) => {
+
+    clearTimeout(this.state.searchTimer)
+
+    this.setState({
+      searchTimer: setTimeout( () => this.handleValue(val), 300 ),
+      searchBarLoading:true
+    })
   }
 
   async getGames () {
@@ -33,12 +45,12 @@ class App extends Component {
       console.log(data)
 
       this.setState({
-        curGames:data
+        curGames:data,
+        searchBarLoading:false
       })
     }catch(e){
       console.log(e.message)
     }
-
   }
 
   render() {
@@ -59,7 +71,10 @@ class App extends Component {
             <p className="subtitle">
               gotta <strong>'cheev</strong> em all!
             </p>
-            <Input label={"Search titles..."} submitValue={ this.handleValue }/>
+            <Input label={"Search titles..."} 
+                    submitValue={ this.handleChange } 
+                    isLoading={this.state.searchBarLoading}
+                    />
             <div className="title is-size-2">{this.state.curAppName}</div>
             {games}
           </div>

@@ -19,18 +19,20 @@ class Input extends Component {
         // run submitValue function passed down from parent
         this.props.submitValue(e.target.value, this.props.id)
         
-        this.setState(
-            {content:e.target.value}
-        )
+        this.setState({content:e.target.value})
     }
 
     render() {
 
+        let isLoading = (this.props.isLoading) ? 'is-loading' : ''
+
         return(
-            <input className={'input'} type='text' placeholder={this.state.defaultLabel}
-                    value={this.state.content}
-                    onChange={this.handleChange}
-                />
+            <div className={`control ${isLoading}`}>
+                <input className='input' type='text' placeholder={this.state.defaultLabel}
+                        value={this.state.content}
+                        onChange={this.handleChange}
+                    />
+            </div>
         )
     }
 }
